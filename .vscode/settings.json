@@ -1,0 +1,9 @@
+{
+    "editor.codeActionsOnSave": {
+        "quickfix.insertSemicolon": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "[dart]": {
+        "editor.formatOnSave": true,
+    }
+}
