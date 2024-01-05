@@ -6,7 +6,7 @@ final class TodosOverviewState extends Equatable {
   const TodosOverviewState(
       {this.status = TodoOverviewStatus.initial,
       this.todos = const [],
-      this.filter = TodosFilter.progress,
+      this.filter = TodosFilter.all,
       this.selectedTodo});
 
   final TodoOverviewStatus status;
