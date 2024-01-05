@@ -1,6 +1,34 @@
 part of 'todo_bloc.dart';
 
-@immutable
-sealed class TodoState {}
+enum TodoOverviewStatus { initial, loading, success, failure }
 
-final class TodoInitial extends TodoState {}
+final class TodosOverviewState extends Equatable {
+  const TodosOverviewState(
+      {this.status = TodoOverviewStatus.initial,
+      this.todos = const [],
+      this.filter = TodosFilter.progress,
+      this.selectedTodo});
+
+  final TodoOverviewStatus status;
+  final List<Todo> todos;
+  final TodosFilter filter;
+  final Todo? selectedTodo;
+
+  Iterable<Todo> get filteredTodos => filter.applyAll(todos);
+
+  TodosOverviewState copyWith({
+    TodoOverviewStatus? status,
+    List<Todo>? todos,
+    TodosFilter? filter,
+    Todo? selectedTodo,
+  }) {
+    return TodosOverviewState(
+        status: status ?? this.status,
+        todos: todos ?? this.todos,
+        filter: filter ?? this.filter,
+        selectedTodo: selectedTodo);
+  }
+
+  @override
+  List<Object> get props => [status, todos, filter];
+}
