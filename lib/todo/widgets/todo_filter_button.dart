@@ -22,7 +22,7 @@ class TodoFilterButton extends StatelessWidget {
         itemBuilder: (context) => TodosFilter.values.map((filterItem) {
               return PopupMenuItem(
                 value: filterItem,
-                child: Text(filterItem.name),
+                child: Text(filterItem.label),
               );
             }).toList());
   }
