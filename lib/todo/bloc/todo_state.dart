@@ -14,7 +14,7 @@ final class TodosOverviewState extends Equatable {
   final TodosFilter filter;
   final Todo? selectedTodo;
 
-  Iterable<Todo> get filteredTodos => filter.applyAll(todos);
+  List<Todo> get filteredTodos => filter.applyAll(todos).toList();
 
   TodosOverviewState copyWith({
     TodoOverviewStatus? status,

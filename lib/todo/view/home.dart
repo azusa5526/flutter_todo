@@ -3,6 +3,7 @@ import 'package:todo/todo/bloc/todo_bloc.dart';
 import '../../develop.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/todo_filter_button.dart';
+import 'package:todo/api/todo.api.dart' show Todo;
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -27,17 +28,18 @@ class TodoListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint('Listview build func');
-    return BlocBuilder<TodosOverviewBloc, TodosOverviewState>(
-        builder: (context, state) {
-      return Expanded(
-          child: ListView.builder(
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(state.filteredTodos.toList()[index].title),
-          );
-        },
-        itemCount: state.filteredTodos.length,
-      ));
-    });
+    return BlocSelector<TodosOverviewBloc, TodosOverviewState, List<Todo>>(
+        selector: (state) => state.filteredTodos,
+        builder: (context, filteredTodos) {
+          return Expanded(
+              child: ListView.builder(
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(filteredTodos[index].title),
+              );
+            },
+            itemCount: filteredTodos.length,
+          ));
+        });
   }
 }
