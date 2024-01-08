@@ -2,8 +2,8 @@ import '../../api/todo.api.dart';
 import 'package:flutter/material.dart';
 
 enum TodosFilter {
-  all(value: 'All', label: '全部', icon: Icons.pending),
-  pending(value: 'Pending', label: '待處理', icon: Icons.pending),
+  all(value: 'All', label: '全部', icon: Icons.rocket_launch_outlined),
+  pending(value: 'Pending', label: '待處理', icon: Icons.pending_actions_outlined),
   progress(value: 'Progress', label: '進行中', icon: Icons.directions_run),
   resolved(value: 'Resolved', label: '已完成', icon: Icons.done);
 

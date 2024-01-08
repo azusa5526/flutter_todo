@@ -128,10 +128,13 @@ Future<Todo> fetchById(String id) async {
   throw HttpException('[Todo.fetchById] ${res.statusCode} ${res.body}');
 }
 
-Future<Todo> create({required String title, required String content}) async {
+Future<Todo> create(
+    {required String title,
+    required String content,
+    required String state}) async {
   final res = await http.post(_apiUri('todos'),
       headers: _commonHeaders,
-      body: jsonEncode({'title': title, 'content': content}));
+      body: jsonEncode({'title': title, 'content': content, 'state': state}));
 
   if (_isOk(res.statusCode)) {
     var todo = jsonDecode(res.body);
