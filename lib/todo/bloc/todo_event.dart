@@ -18,4 +18,12 @@ final class TodoFilterChanged extends TodosOverviewEvent {
   final TodosFilter filter;
 }
 
-final class TodoRefresh extends TodosOverviewEvent {}
+final class TodoRefresh extends TodosOverviewEvent {
+  const TodoRefresh({this.callback});
+  final Function? callback;
+}
+
+final class TodoSelected extends TodosOverviewEvent {
+  const TodoSelected(this.todo);
+  final Todo todo;
+}

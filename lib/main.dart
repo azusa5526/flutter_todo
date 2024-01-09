@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => TodosOverviewBloc()..add(TodoRefresh()),
+      create: (context) => TodosOverviewBloc()..add(const TodoRefresh()),
       child: MaterialApp.router(
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

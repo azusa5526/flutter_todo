@@ -28,8 +28,7 @@ class AddTodo extends StatelessWidget {
                       state: formData.state);
                   if (context.mounted) {
                     BlocProvider.of<TodosOverviewBloc>(context)
-                        .add(TodoRefresh());
-                    context.pop();
+                        .add(const TodoRefresh());
                   }
                 } catch (error) {
                   console('_addTodo err', error);

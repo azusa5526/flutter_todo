@@ -38,7 +38,12 @@ class TodoListView extends StatelessWidget {
               child: ListView.builder(
             itemBuilder: (context, index) {
               return ListTile(
-                onTap: () {},
+                onTap: () {
+                  context
+                      .read<TodosOverviewBloc>()
+                      .add(TodoSelected(filteredTodos[index]));
+                  context.push('/edit');
+                },
                 title: Text(filteredTodos[index].title),
               );
             },
