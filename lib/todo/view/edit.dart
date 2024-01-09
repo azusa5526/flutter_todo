@@ -106,12 +106,12 @@ class DeleteDialog extends StatelessWidget {
     Todo? selectedTodo = context.read<TodosOverviewBloc>().state.selectedTodo;
 
     return AlertDialog(
-      title: const Text('Delete todo'),
-      content: const Text('AlertDialog description'),
+      title: const Text('刪除這項 Todo?'),
+      content: const Text('Todo 一經刪除將無法恢復'),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, 'Cancel'),
-          child: const Text('Cancel'),
+          child: const Text('取消'),
         ),
         TextButton(
           onPressed: () {
@@ -122,32 +122,9 @@ class DeleteDialog extends StatelessWidget {
               Navigator.pop(context, 'OK');
             }
           },
-          child: const Text('OK'),
+          child: const Text('刪除'),
         ),
       ],
     );
-
-    // return AlertDialog(
-    //   title: const Text('Delete todo'),
-    //   content: const Text('AlertDialog description'),
-    //   actions: [
-    //     TextButton(
-    //       onPressed: () => Navigator.pop(context, 'Cancel'),
-    //       child: const Text('Cancel'),
-    //     ),
-    //     TextButton(
-    //       onPressed: () {
-    //         if (selectedTodo != null) {
-    //           context.read<TodosOverviewBloc>()
-    //             ..add(TodoDeleted(selectedTodo.id))
-    //             ..add(const TodoRefresh());
-    //           Navigator.pop(context, 'OK');
-    //           context.pop();
-    //         }
-    //       },
-    //       child: const Text('OK'),
-    //     ),
-    //   ],
-    // );
   }
 }
