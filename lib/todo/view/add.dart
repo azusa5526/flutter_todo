@@ -17,7 +17,6 @@ class AddTodo extends StatelessWidget {
         actions: [
           BlocListener<TodosOverviewBloc, TodosOverviewState>(
             listener: (context, state) {
-              console('listener', state);
               if (state.status == TodoOverviewStatus.success) {
                 context.pop();
               }

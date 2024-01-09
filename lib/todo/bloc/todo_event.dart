@@ -13,6 +13,12 @@ final class TodoDeleted extends TodosOverviewEvent {
   final String id;
 }
 
+final class TodoUpdated extends TodosOverviewEvent {
+  const TodoUpdated(this.id, this.formData);
+  final String id;
+  final TodoFormData formData;
+}
+
 final class TodoFilterChanged extends TodosOverviewEvent {
   const TodoFilterChanged(this.filter);
   final TodosFilter filter;

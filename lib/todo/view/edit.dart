@@ -12,7 +12,10 @@ class EditTodo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.edit_outlined)),
+          IconButton(
+              onPressed: () => showDialog<String>(
+                  context: context, builder: (context) => const UpdateDialog()),
+              icon: const Icon(Icons.edit_outlined)),
           IconButton(
               onPressed: () => showDialog<String>(
                   context: context, builder: (context) => const DeleteDialog()),
@@ -23,7 +26,6 @@ class EditTodo extends StatelessWidget {
         ]),
         body: BlocListener<TodosOverviewBloc, TodosOverviewState>(
             listener: (context, state) {
-              console('listener', state);
               if (state.status == TodoOverviewStatus.success) {
                 context.pop();
               }
@@ -92,7 +94,7 @@ class _TodoFormState extends State<TodoForm> {
                 },
                 dropdownMenuEntries: TodoState.values.map((state) {
                   return DropdownMenuEntry(value: state, label: state.label);
-                }).toList())
+                }).toList()),
           ],
         ));
   }
@@ -123,6 +125,42 @@ class DeleteDialog extends StatelessWidget {
             }
           },
           child: const Text('刪除'),
+        ),
+      ],
+    );
+  }
+}
+
+class UpdateDialog extends StatelessWidget {
+  const UpdateDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Todo? selectedTodo = context.read<TodosOverviewBloc>().state.selectedTodo;
+
+    return AlertDialog(
+      title: const Text('修改這項 Todo?'),
+      content: const Text(''),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context, 'Cancel'),
+          child: const Text('取消'),
+        ),
+        TextButton(
+          onPressed: () {
+            if (selectedTodo != null) {
+              _formKey.currentState!.save();
+              if (formData.state.isEmpty) {
+                formData.state = selectedTodo.state.value;
+              }
+
+              context.read<TodosOverviewBloc>()
+                ..add(TodoUpdated(selectedTodo.id, formData))
+                ..add(const TodoRefresh());
+              Navigator.pop(context, 'OK');
+            }
+          },
+          child: const Text('修改'),
         ),
       ],
     );
