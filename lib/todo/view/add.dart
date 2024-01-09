@@ -15,27 +15,33 @@ class AddTodo extends StatelessWidget {
         title: const Text('AddTodo page'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
-          ElevatedButton(
-            onPressed: () async {
-              _formKey.currentState!.save();
-              if (_formKey.currentState!.validate()) {
-                // console('isValide', formData);
-                // _addTodo(context);
-                try {
-                  await create(
-                      title: formData.title,
-                      content: formData.content,
-                      state: formData.state);
-                  if (context.mounted) {
-                    BlocProvider.of<TodosOverviewBloc>(context)
-                        .add(const TodoRefresh());
-                  }
-                } catch (error) {
-                  console('_addTodo err', error);
-                }
+          BlocListener<TodosOverviewBloc, TodosOverviewState>(
+            listener: (context, state) {
+              console('listener', state);
+              if (state.status == TodoOverviewStatus.success) {
+                context.pop();
               }
             },
-            child: const Text('儲存'),
+            child: ElevatedButton(
+              onPressed: () async {
+                _formKey.currentState!.save();
+                if (_formKey.currentState!.validate()) {
+                  try {
+                    await create(
+                        title: formData.title,
+                        content: formData.content,
+                        state: formData.state);
+                    if (context.mounted) {
+                      BlocProvider.of<TodosOverviewBloc>(context)
+                          .add(const TodoRefresh());
+                    }
+                  } catch (error) {
+                    console('_addTodo err', error);
+                  }
+                }
+              },
+              child: const Text('儲存'),
+            ),
           ),
           const SizedBox(
             width: 8.0,
