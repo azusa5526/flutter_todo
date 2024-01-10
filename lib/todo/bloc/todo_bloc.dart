@@ -29,7 +29,6 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
     try {
       List<Todo> todos = (await fetchAll()).toList();
       emit(state.copyWith(todos: todos, status: TodoOverviewStatus.success));
-      // if (event.callback != null) event.callback!();
     } on HttpException {
       debugPrint('_onRefresh fail');
       emit(state.copyWith(status: TodoOverviewStatus.failure));
