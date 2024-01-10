@@ -11,44 +11,44 @@ class AddTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AddTodo page'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        actions: [
-          BlocListener<TodosOverviewBloc, TodosOverviewState>(
-            listener: (context, state) {
-              if (state.status == TodoOverviewStatus.success) {
-                context.pop();
-              }
-            },
-            child: ElevatedButton(
-              onPressed: () async {
-                _formKey.currentState!.save();
-                if (_formKey.currentState!.validate()) {
-                  try {
-                    await create(
-                        title: formData.title,
-                        content: formData.content,
-                        state: formData.state);
-                    if (context.mounted) {
-                      BlocProvider.of<TodosOverviewBloc>(context)
-                          .add(const TodoRefresh());
-                    }
-                  } catch (error) {
-                    console('_addTodo err', error);
-                  }
+        appBar: AppBar(
+          title: const Text('新增 Todo'),
+          actions: [
+            BlocListener<TodosOverviewBloc, TodosOverviewState>(
+              listener: (context, state) {
+                if (state.status == TodoOverviewStatus.success) {
+                  context.pop();
                 }
               },
-              child: const Text('儲存'),
+              child: ElevatedButton(
+                onPressed: () async {
+                  _formKey.currentState!.save();
+                  if (_formKey.currentState!.validate()) {
+                    try {
+                      await create(
+                          title: formData.title,
+                          content: formData.content,
+                          state: formData.state);
+                      if (context.mounted) {
+                        BlocProvider.of<TodosOverviewBloc>(context)
+                            .add(const TodoRefresh());
+                      }
+                    } catch (error) {
+                      console('_addTodo err', error);
+                    }
+                  }
+                },
+                child: const Text('儲存'),
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 8.0,
-          )
-        ],
-      ),
-      body: const TodoForm(),
-    );
+            const SizedBox(
+              width: 8.0,
+            )
+          ],
+        ),
+        body: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: const TodoForm()));
   }
 }
 
@@ -123,7 +123,10 @@ class _TodoFormState extends State<TodoForm> {
                   formData.state = filter?.value ?? TodoState.pending.value;
                 },
                 dropdownMenuEntries: TodoState.values.map((state) {
-                  return DropdownMenuEntry(value: state, label: state.label);
+                  return DropdownMenuEntry(
+                      value: state,
+                      label: state.label,
+                      leadingIcon: Icon(state.icon));
                 }).toList())
           ],
         ));

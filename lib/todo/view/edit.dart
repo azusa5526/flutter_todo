@@ -11,7 +11,7 @@ class EditTodo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(actions: [
+        appBar: AppBar(title: const Text('編輯 Todo'), actions: [
           IconButton(
               onPressed: () => showDialog<String>(
                   context: context, builder: (context) => const UpdateDialog()),
@@ -30,7 +30,9 @@ class EditTodo extends StatelessWidget {
                 context.pop();
               }
             },
-            child: const TodoForm()));
+            child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: const TodoForm())));
   }
 }
 

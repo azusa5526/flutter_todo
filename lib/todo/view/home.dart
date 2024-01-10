@@ -14,10 +14,10 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Home bitch'),
+        title: const Text('Todo List'),
         actions: const [TodoFilterButton()],
       ),
-      body: const Column(children: [Text('123'), TodoListView()]),
+      body: const Column(children: [TodoListView()]),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.push('/add'),
         child: const Icon(Icons.add),
@@ -44,6 +44,7 @@ class TodoListView extends StatelessWidget {
                       .add(TodoSelected(filteredTodos[index]));
                   context.push('/edit');
                 },
+                trailing: Icon(filteredTodos[index].state.icon),
                 title: Text(filteredTodos[index].title),
               );
             },

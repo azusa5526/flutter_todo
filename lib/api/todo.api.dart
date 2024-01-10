@@ -165,7 +165,7 @@ Future<Todo> update(String id,
 }
 
 enum TodoState {
-  pending(value: 'Pending', label: '待處理', icon: Icons.pending),
+  pending(value: 'Pending', label: '待處理', icon: Icons.pending_actions_outlined),
   progress(value: 'Progress', label: '進行中', icon: Icons.directions_run),
   resolved(value: 'Resolved', label: '已完成', icon: Icons.done);
 
