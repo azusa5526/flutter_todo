@@ -21,7 +21,7 @@ class EditTodo extends StatelessWidget {
                   context: context, builder: (context) => const DeleteDialog()),
               icon: const Icon(Icons.delete_forever_outlined)),
           const SizedBox(
-            width: 8.0,
+            width: 4.0,
           )
         ]),
         body: BlocListener<TodosOverviewBloc, TodosOverviewState>(

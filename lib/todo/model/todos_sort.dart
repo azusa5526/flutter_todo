@@ -3,8 +3,8 @@ import '../../api/todo.api.dart';
 import 'package:todo/develop.dart';
 
 enum TodoSort {
-  asc(icon: Icons.home, label: '依據標題遞增'),
-  desc(icon: Icons.home, label: '依據標題遞減');
+  asc(icon: Icons.keyboard_double_arrow_up_outlined, label: '依據標題遞增'),
+  desc(icon: Icons.keyboard_double_arrow_down_outlined, label: '依據標題遞減');
 
   const TodoSort({required this.icon, required this.label});
 

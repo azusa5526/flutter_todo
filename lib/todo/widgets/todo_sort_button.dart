@@ -10,6 +10,7 @@ class TodoSortButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
+        icon: const Icon(Icons.sort_outlined),
         onSelected: (option) {
           context.read<TodosOverviewBloc>().add(TodoSortChanged(option));
           console('TodoSortButton onSelected',
@@ -21,6 +22,7 @@ class TodoSortButton extends StatelessWidget {
                   child: ListTile(
                     title: Text(option.label),
                     leading: Icon(option.icon),
+                    visualDensity: const VisualDensity(vertical: -2.0),
                   ));
             }).toList());
   }

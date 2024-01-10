@@ -14,7 +14,7 @@ class TodoFilterButton extends StatelessWidget {
     return PopupMenuButton<TodosFilter>(
         initialValue: activeFilter,
         icon: const Icon(
-          Icons.filter_list_outlined,
+          Icons.category_outlined,
         ),
         onSelected: (todoFilter) {
           context.read<TodosOverviewBloc>().add(TodoFilterChanged(todoFilter));
@@ -25,6 +25,8 @@ class TodoFilterButton extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(filterItem.icon),
                   title: Text(filterItem.label),
+                  visualDensity:
+                      const VisualDensity(vertical: -2.0, horizontal: 3.0),
                 ),
               );
             }).toList());

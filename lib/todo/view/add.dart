@@ -20,26 +20,25 @@ class AddTodo extends StatelessWidget {
                   context.pop();
                 }
               },
-              child: ElevatedButton(
-                onPressed: () async {
-                  _formKey.currentState!.save();
-                  if (_formKey.currentState!.validate()) {
-                    try {
-                      await create(
-                          title: formData.title,
-                          content: formData.content,
-                          state: formData.state);
-                      if (context.mounted) {
-                        BlocProvider.of<TodosOverviewBloc>(context)
-                            .add(const TodoRefresh());
+              child: IconButton(
+                  onPressed: () async {
+                    _formKey.currentState!.save();
+                    if (_formKey.currentState!.validate()) {
+                      try {
+                        await create(
+                            title: formData.title,
+                            content: formData.content,
+                            state: formData.state);
+                        if (context.mounted) {
+                          BlocProvider.of<TodosOverviewBloc>(context)
+                              .add(const TodoRefresh());
+                        }
+                      } catch (error) {
+                        console('_addTodo err', error);
                       }
-                    } catch (error) {
-                      console('_addTodo err', error);
                     }
-                  }
-                },
-                child: const Text('儲存'),
-              ),
+                  },
+                  icon: const Icon(Icons.save)),
             ),
             const SizedBox(
               width: 8.0,

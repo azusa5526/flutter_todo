@@ -16,9 +16,18 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Todo List'),
-        actions: const [TodoSortButton(), TodoFilterButton()],
+        actions: const [
+          TodoSortButton(),
+          TodoFilterButton(),
+          SizedBox(
+            width: 4.0,
+          )
+        ],
       ),
-      body: const Column(children: [TodoListView()]),
+      body: Container(
+        padding: const EdgeInsets.all(8.0),
+        child: const Column(children: [TodoListView()]),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.push('/add'),
         child: const Icon(Icons.add),
@@ -36,7 +45,7 @@ class TodoListView extends StatelessWidget {
         selector: (state) => state.displayedTodos,
         builder: (context, displayedTodos) {
           return Expanded(
-              child: ListView.builder(
+              child: ListView.separated(
             itemBuilder: (context, index) {
               return ListTile(
                 onTap: () {
@@ -50,6 +59,9 @@ class TodoListView extends StatelessWidget {
               );
             },
             itemCount: displayedTodos.length,
+            separatorBuilder: (context, index) {
+              return Divider(color: Colors.grey[300]);
+            },
           ));
         });
   }
