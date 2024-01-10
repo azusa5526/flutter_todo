@@ -9,6 +9,7 @@ import 'dart:developer';
 import '../model/todos_filter.dart';
 import 'package:todo/develop.dart';
 import '../view/edit.dart' show TodoFormData;
+import '../model/todos_sort.dart';
 
 part 'todo_event.dart';
 part 'todo_state.dart';
@@ -17,6 +18,7 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
   TodosOverviewBloc() : super(const TodosOverviewState()) {
     on<TodoRefresh>(_onRefresh, transformer: sequential());
     on<TodoFilterChanged>(_onFilterChange);
+    on<TodoSortChanged>(_onSortChange);
     on<TodoDeleted>(_onDelete, transformer: sequential());
     on<TodoUpdated>(_onUpdate, transformer: sequential());
     on<TodoSelected>(_onSelect);
@@ -36,6 +38,10 @@ class TodosOverviewBloc extends Bloc<TodosOverviewEvent, TodosOverviewState> {
 
   _onFilterChange(TodoFilterChanged event, Emitter emit) async {
     emit(state.copyWith(filter: event.filter));
+  }
+
+  _onSortChange(TodoSortChanged event, Emitter emit) async {
+    emit(state.copyWith(sort: event.sort));
   }
 
   Future<void> _onDelete(TodoDeleted event, Emitter emit) async {

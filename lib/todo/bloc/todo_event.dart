@@ -24,6 +24,11 @@ final class TodoFilterChanged extends TodosOverviewEvent {
   final TodosFilter filter;
 }
 
+final class TodoSortChanged extends TodosOverviewEvent {
+  const TodoSortChanged(this.sort);
+  final TodoSort sort;
+}
+
 final class TodoRefresh extends TodosOverviewEvent {
   const TodoRefresh({this.callback});
   final Function? callback;
